@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-Ragging Initiative - Stop The Cycle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000; /* Black background */
+            color: #f3f4f6; /* Lighter text for dark mode */
+        }
+        .hero-bg {
+            background-color: #000000;
+            background-image: radial-gradient(circle at top right, rgba(249, 115, 22, 0.15), transparent 50%),
+                              radial-gradient(circle at bottom left, rgba(56, 189, 248, 0.15), transparent 50%);
+        }
+        .wall-of-support-name, .gallery-item, .news-card, .stat-card {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Custom styles for dark theme */
+        .section-bg-dark {
+            background-color: #111827; /* gray-900 */
+        }
+        .section-bg-darker {
+             background-color: #000000;
+        }
+        .card-bg {
+            background-color: #1f2937; /* gray-800 */
+        }
+        .text-light {
+            color: #d1d5db; /* gray-300 */
+        }
+        .text-lighter {
+            color: #9ca3af; /* gray-400 */
+        }
+        .border-dark {
+            border-color: #374151; /* gray-700 */
+        }
+        .gallery-item img {
+            transition: transform 0.3s ease-in-out;
+            width: 100%;
+            height: 300px; /* Fixed height for gallery images */
+            object-fit: cover; /* Ensures images cover the area well */
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Swiper Customization */
+        .swiper-container {
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 50px; /* Space for pagination */
+            position: relative; 
+        }
+        .swiper-slide {
+            height: auto; 
+            display: flex;
+            justify-content: center;
+            align-items: stretch; 
+        }
+        .swiper-slide .card-bg, .swiper-slide .news-card {
+             height: 100%; 
+             display: flex;
+             flex-direction: column;
+        }
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #f97316; /* Orange color for arrows */
+            top: 45%;
+        }
+        .swiper-pagination-bullet {
+            background: #9ca3af; /* Gray for inactive bullets */
+        }
+        .swiper-pagination-bullet-active {
+            background: #f97316; /* Orange for active bullet */
+        }
+    </style>
+</head>
+<body class="bg-black">
+
+    <!-- Header -->
+    <header class="bg-gray-900/80 backdrop-blur-sm shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 grid grid-cols-3 items-center">
+            <!-- Left placeholder for spacing -->
+            <div class="justify-self-start"></div>
+
+            <!-- Centered Logo -->
+            <div class="flex justify-center">
+                <a href="#" class="text-2xl font-bold text-white">
+                    <!-- SVG Logo -->
+                    <svg width="160" height="40" viewBox="0 0 160 40" xmlns="http://www.w3.org/2000/svg">
+                        <text x="12" y="28" font-family="Inter, sans-serif" font-size="28" font-weight="bold" fill="white">RAGGING</text>
+                        <line x1="5" y1="2" x2="155" y2="38" stroke="#FF0000" stroke-width="5" />
+                        <line x1="5" y1="38" x2="155" y2="2" stroke="#FF0000" stroke-width="5" />
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Right Navigation Links -->
+            <div class="flex justify-end items-center">
+                <div class="hidden md:flex space-x-6">
+                    <a href="#news" class="text-gray-300 hover:text-orange-500 transition duration-300">News</a>
+                    <a href="#stats" class="text-gray-300 hover:text-orange-500 transition duration-300">Statistics</a>
+                    <a href="#gallery" class="text-gray-300 hover:text-orange-500 transition duration-300">Gallery</a>
+                    <a href="#national-day" class="text-gray-300 hover:text-orange-500 transition duration-300">Anti-Ragging Day</a>
+                    <a href="#report" class="text-gray-300 hover:text-orange-500 transition duration-300">Report</a>
+                    <a href="#helpline" class="text-gray-300 hover:text-orange-500 transition duration-300">Helplines</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden flex items-center text-white">
+                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900">
+            <a href="#news" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-800">News</a>
+            <a href="#stats" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-800">Statistics</a>
+            <a href="#gallery" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-800">Gallery</a>
+            <a href="#national-day" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-800">Anti-Ragging Day</a>
+            <a href="#report" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-800">Report</a>
+            <a href="#helpline" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-800">Helplines</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section - This section is static and has no slider -->
+        <section class="hero-bg text-white py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">Stop the Vicious Cycle.</h1>
+                <p class="text-2xl md:text-4xl font-bold text-orange-500 mb-8">Stand Tall Against Ragging.</p>
+                <p class="text-lg md:text-xl text-lighter mb-8 max-w-3xl mx-auto">It's not tradition. It's abuse. Break the chain of fear and humiliation. Your courage can redefine the campus culture.</p>
+                <a href="#report" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105">File an Official Complaint</a>
+            </div>
+        </section>
+
+        <!-- Incidents and News Section -->
+        <section id="news" class="py-20 section-bg-darker overflow-hidden">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-white">Incidents & News</h2>
+                <!-- Swiper -->
+                <div class="swiper-container news-slider">
+                    <div class="swiper-wrapper">
+                        <!-- Slide 1 -->
+                        <div class="swiper-slide">
+                            <div class="news-card card-bg rounded-lg shadow-lg overflow-hidden">
+                                <div class="p-6 flex-grow">
+                                    <p class="text-sm text-sky-400 mb-2">NDTV | Feb 2023</p>
+                                    <h3 class="text-xl font-bold mb-3 text-white">Telangana Student Dies After Harassment By Senior</h3>
+                                    <p class="text-lighter flex-grow">A first-year postgraduate medical student in Telangana, who attempted suicide after being harassed by a senior, died after battling for her life for five days.</p>
+                                </div>
+                                <a href="https://www.ndtv.com/india-news/telangana-student-who-attempted-suicide-over-harassment-by-senior-dies-3817286" target="_blank" rel="noopener noreferrer" class="block bg-gray-700 text-center py-3 font-semibold text-white hover:bg-orange-500 transition-colors duration-300">Read More</a>
+                            </div>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="swiper-slide">
+                            <div class="news-card card-bg rounded-lg shadow-lg overflow-hidden">
+                                <div class="p-6 flex-grow">
+                                    <p class="text-sm text-sky-400 mb-2">Times of India | Dec 2022</p>
+                                    <h3 class="text-xl font-bold mb-3 text-white">5 Resident Doctors at BJMC Ended Lives This Year</h3>
+                                    <p class="text-lighter flex-grow">Highlighting a severe crisis, it was reported that five resident doctors at BJ Medical College in Ahmedabad had died by suicide in a single year.</p>
+                                </div>
+                                <a href="https://timesofindia.indiatimes.com/city/ahmedabad/5-bjmc-resident-docs-ended-lives-this-yr/articleshow/96043893.cms" target="_blank" rel="noopener noreferrer" class="block bg-gray-700 text-center py-3 font-semibold text-white hover:bg-orange-500 transition-colors duration-300">Read More</a>
+                            </div>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="swiper-slide">
+                            <div class="news-card card-bg rounded-lg shadow-lg overflow-hidden">
+                                <div class="p-6 flex-grow">
+                                    <p class="text-sm text-sky-400 mb-2">Medical Dialogues | Feb 2025</p>
+                                    <h3 class="text-xl font-bold mb-3 text-white">1,120 PG Doctors Dropped Out in 5 Years</h3>
+                                    <p class="text-lighter flex-grow">Data revealed that over a thousand postgraduate doctors dropped out of their courses in the last five years, with many citing a toxic work environment.</p>
+                                </div>
+                                <a href="https://medicaldialogues.in/news/education/medical-colleges/1120-doctors-pursuing-pg-courses-dropped-out-of-college-in-last-5-years-maximum-from-vmmc-here-is-the-state-wise-list-125097" target="_blank" rel="noopener noreferrer" class="block bg-gray-700 text-center py-3 font-semibold text-white hover:bg-orange-500 transition-colors duration-300">Read More</a>
+                            </div>
+                        </div>
+                        <!-- Slide 4 -->
+                        <div class="swiper-slide">
+                            <div class="news-card card-bg rounded-lg shadow-lg overflow-hidden">
+                                <div class="p-6 flex-grow">
+                                    <p class="text-sm text-sky-400 mb-2">The Hindu | Feb 2024</p>
+                                    <h3 class="text-xl font-bold mb-3 text-white">Junior Residents Accuse JIPMER HOD of Harassment</h3>
+                                    <p class="text-lighter flex-grow">Junior resident doctors at JIPMER, Puducherry, have accused their Head of Department of persistent harassment, leading to a toxic work environment.</p>
+                                </div>
+                                <a href="https://www.thehindu.com/news/cities/puducherry/junior-residents-accuse-jipmer-hod-of-harassment/article67830141.ece" target="_blank" rel="noopener noreferrer" class="block bg-gray-700 text-center py-3 font-semibold text-white hover:bg-orange-500 transition-colors duration-300">Read More</a>
+                            </div>
+                        </div>
+                        <!-- Slide 5 -->
+                        <div class="swiper-slide">
+                            <div class="news-card card-bg rounded-lg shadow-lg overflow-hidden">
+                                <div class="p-6 flex-grow">
+                                    <p class="text-sm text-sky-400 mb-2">Times of India | Jul 2024</p>
+                                    <h3 class="text-xl font-bold mb-3 text-white">Patiala Medical Student Ends Life</h3>
+                                    <p class="text-lighter flex-grow">A third-year MD student at a government medical college in Patiala died by suicide, with peers pointing towards extreme stress and a toxic academic environment.</p>
+                                </div>
+                                <a href="https://timesofindia.indiatimes.com/india/patiala-med-student-ends-life/articleshow/111888962.cms" target="_blank" rel="noopener noreferrer" class="block bg-gray-700 text-center py-3 font-semibold text-white hover:bg-orange-500 transition-colors duration-300">Read More</a>
+                            </div>
+                        </div>
+                        <!-- Slide 6 -->
+                        <div class="swiper-slide">
+                            <div class="news-card card-bg rounded-lg shadow-lg overflow-hidden">
+                                <div class="p-6 flex-grow">
+                                    <p class="text-sm text-sky-400 mb-2">Times of India | Mar 2024</p>
+                                    <h3 class="text-xl font-bold mb-3 text-white">J&K Medico Alleges Ragging, 5 Held</h3>
+                                    <p class="text-lighter flex-grow">Five students were arrested in Vijayapura, Karnataka, after a medical student from Jammu and Kashmir filed a formal complaint alleging severe ragging by seniors.</p>
+                                </div>
+                                <a href="https://timesofindia.indiatimes.com/india/jk-medico-alleges-ragging-in-vijayapura-college-5-held/articleshow/118397552.cms" target="_blank" rel="noopener noreferrer" class="block bg-gray-700 text-center py-3 font-semibold text-white hover:bg-orange-500 transition-colors duration-300">Read More</a>
+                            </div>
+                        </div>
+                         <!-- Slide 7 -->
+                        <div class="swiper-slide">
+                            <div class="news-card card-bg rounded-lg shadow-lg overflow-hidden">
+                                <div class="p-6 flex-grow">
+                                    <p class="text-sm text-sky-400 mb-2">My Pune Pulse | Aug 2024</p>
+                                    <h3 class="text-xl font-bold mb-3 text-white">28-Year-Old Doctor at Ruby Hall Clinic Dies by Suicide</h3>
+                                    <p class="text-lighter flex-grow">A young resident doctor at a prominent Pune hospital died by suicide, sparking conversations about the immense pressure faced by medical professionals.</p>
+                                </div>
+                                <a href="https://www.mypunepulse.com/pune-28-year-old-resident-doctor-at-ruby-hall-clinic-dies-by-suicide/" target="_blank" rel="noopener noreferrer" class="block bg-gray-700 text-center py-3 font-semibold text-white hover:bg-orange-500 transition-colors duration-300">Read More</a>
+                            </div>
+                        </div>
+                        <!-- Slide 8 -->
+                        <div class="swiper-slide">
+                            <div class="news-card card-bg rounded-lg shadow-lg overflow-hidden">
+                                <div class="p-6 flex-grow">
+                                    <p class="text-sm text-sky-400 mb-2">Medical Dialogues | May 2024</p>
+                                    <h3 class="text-xl font-bold mb-3 text-white">5 Doctors Threaten Mass Suicide Over Toxic Culture</h3>
+                                    <p class="text-lighter flex-grow">Five resident doctors at Gandhi Medical College, Bhopal, threatened mass suicide, alleging toxic work culture and harassment from the administration.</p>
+                                </div>
+                                <a href="https://medicaldialogues.in/news/health/doctors/toxic-work-culture-allegations-rocks-gandhi-medical-college-bhopal-5-resident-doctors-threaten-mass-suicide-127186" target="_blank" rel="noopener noreferrer" class="block bg-gray-700 text-center py-3 font-semibold text-white hover:bg-orange-500 transition-colors duration-300">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                    <!-- Add Navigation -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section id="stats" class="py-20 section-bg-dark overflow-hidden">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-white">The Sobering Statistics</h2>
+                 <!-- Swiper -->
+                <div class="swiper-container stats-slider">
+                    <div class="swiper-wrapper">
+                        <!-- Slide 1 -->
+                        <div class="swiper-slide">
+                            <div class="stat-card card-bg p-8 rounded-lg shadow-lg text-center border-t-4 border-orange-500 flex flex-col h-full">
+                                <p class="text-5xl font-extrabold text-orange-500">45.1%</p>
+                                <h3 class="text-xl font-bold mt-4 text-white flex-grow">A Disproportionate Crisis</h3>
+                                <p class="text-lighter mt-2">Of all ragging-related deaths occur in medical colleges, which represent only 1.1% of the total student population.</p>
+                            </div>
+                        </div>
+                         <!-- Slide 2 -->
+                        <div class="swiper-slide">
+                            <div class="stat-card card-bg p-8 rounded-lg shadow-lg text-center border-t-4 border-sky-400 flex flex-col h-full">
+                                <p class="text-5xl font-extrabold text-sky-400">119+</p>
+                                <h3 class="text-xl font-bold mt-4 text-white flex-grow">The Human Toll (Last 5 Yrs)</h3>
+                                <p class="text-lighter mt-2">Medical students (UG/PG) died by suicide, and over 1,166 dropped out, citing academic stress and harassment.</p>
+                            </div>
+                        </div>
+                         <!-- Slide 3 -->
+                        <div class="swiper-slide">
+                            <div class="stat-card card-bg p-8 rounded-lg shadow-lg text-center border-t-4 border-orange-500 flex flex-col h-full">
+                                <p class="text-5xl font-extrabold text-orange-500">1,084</p>
+                                <h3 class="text-xl font-bold mt-4 text-white flex-grow">Complaints on the Rise</h3>
+                                <p class="text-lighter mt-2">Ragging complaints were filed in 2024, the highest in 9 years, showing the problem is growing and requires urgent action.</p>
+                            </div>
+                        </div>
+                         <!-- Slide 4 -->
+                        <div class="swiper-slide">
+                             <div class="stat-card card-bg p-8 rounded-lg shadow-lg text-center border-t-4 border-sky-400 flex flex-col h-full">
+                                <p class="text-5xl font-extrabold text-sky-400">31%</p>
+                                <h3 class="text-xl font-bold mt-4 text-white flex-grow">A Mental Health Emergency</h3>
+                                <p class="text-lighter mt-2">Of postgraduate medical students have had suicidal thoughts, with 27% reporting being ragged by seniors or faculty.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                    <!-- Add Navigation -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+                <p class="text-center text-lighter mt-8 text-sm">Source: UGC, NMC, SAVE Report & News Analysis</p>
+            </div>
+        </section>
+
+        <!-- Photo Gallery Section -->
+        <section id="gallery" class="py-20 section-bg-darker overflow-hidden">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-white">Heart-wrenching Headlines and Cutouts</h2>
+                <p class="text-center text-lighter mb-12 max-w-2xl mx-auto">A sobering look at the real impact of ragging.</p>
+                <!-- Swiper -->
+                <div class="swiper-container gallery-slider">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/30ZqPD49/photo-2025-08-11-16-34-54.jpg" alt="Awareness Event 1" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/9rmXzdpm/photo-2025-08-11-16-34-55.jpg" alt="Awareness Event 2" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/bdHNzC1V/photo-2025-08-11-16-34-56.jpg" alt="Awareness Event 3" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/Mv96BnPy/photo-2025-08-11-16-34-57.jpg" alt="Awareness Event 4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/23fSNRLB/photo-2025-08-11-16-34-58.jpg" alt="Awareness Event 5" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/GByd6qcQ/photo-2025-08-11-16-34-59.jpg" alt="Awareness Event 6" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/213z7CMg/photo-2025-08-11-16-35-00.jpg" alt="Awareness Event 7" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/WdKs9QPz/photo-2025-08-11-16-35-01.jpg" alt="Awareness Event 8" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/ygCsKcxz/photo-2025-08-11-16-35-02.jpg" alt="Awareness Event 9" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/0MGxyjKK/photo-2025-08-11-16-35-03.jpg" alt="Awareness Event 10" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/jnsTwTyg/photo-2025-08-11-16-35-04.jpg" alt="Awareness Event 11" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/pyxR1f3f/photo-2025-08-11-16-35-05.jpg" alt="Awareness Event 12" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/Sjrk0Xpw/photo-2025-08-11-16-35-07.jpg" alt="Awareness Event 13" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/bsw8qzyd/photo-2025-08-11-16-35-08.jpg" alt="Awareness Event 14" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/F7CvR2zp/photo-2025-08-11-16-35-09.jpg" alt="Awareness Event 15" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/FYf4JDJ4/photo-2025-08-11-16-35-10.jpg" alt="Awareness Event 16" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/67nxMq0b/photo-2025-08-11-16-35-11.jpg" alt="Awareness Event 17" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/21Pfdh4B/photo-2025-08-11-16-35-12.jpg" alt="Awareness Event 18" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/TLcMXsBr/photo-2025-08-11-16-35-13.jpg" alt="Awareness Event 19" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/hznW6nZD/photo-2025-08-11-16-35-14.jpg" alt="Awareness Event 20" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/q6MfBLdW/photo-2025-08-11-16-35-15.jpg" alt="Awareness Event 21" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/z3JYkJRp/photo-2025-08-11-16-35-16.jpg" alt="Awareness Event 22" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/QV0G4RQD/photo-2025-08-11-16-35-16-2.jpg" alt="Awareness Event 23" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/bsrXK3gt/photo-2025-08-11-16-35-17.jpg" alt="Awareness Event 24" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/yJF2F51w/photo-2025-08-11-16-35-18.jpg" alt="Awareness Event 25" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/Y4cJLkH6/photo-2025-08-11-16-35-19.jpg" alt="Awareness Event 26" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/4YHD3yr4/photo-2025-08-11-16-35-20.jpg" alt="Awareness Event 27" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/YhPckYDy/photo-2025-08-11-16-35-21.jpg" alt="Awareness Event 28" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/LYD7W1ZD/photo-2025-08-11-16-35-22.jpg" alt="Awareness Event 29" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/ftDp5Kkk/photo-2025-08-11-16-35-23.jpg" alt="Awareness Event 30" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/23jgZ2PK/photo-2025-08-11-16-35-24.jpg" alt="Awareness Event 31" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/QKMPZdQ3/photo-2025-08-11-16-35-25.jpg" alt="Awareness Event 32" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                        <div class="swiper-slide"><div class="gallery-item rounded-lg overflow-hidden shadow-lg"><img src="https://i.postimg.cc/dDWpmGFt/photo-2025-08-11-16-35-26.jpg" alt="Awareness Event 33" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFFFFF?text=Image+Not+Found';"></div></div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                    <!-- Add Navigation -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- National Anti-Ragging Day Section -->
+        <section id="national-day" class="py-20 section-bg-dark">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-white">National Anti-Ragging Day: August 12</h2>
+                <p class="text-center text-lighter mb-12 max-w-3xl mx-auto">Designated by the NMC, this day serves as a powerful reminder of our collective responsibility to create a safe and nurturing environment for all students. It's a day for introspection, awareness, and renewing our commitment to a zero-tolerance policy towards ragging.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+                    <!-- Theme 1 -->
+                    <div class="card-bg p-6 rounded-lg shadow-lg border-l-4 border-orange-500">
+                        <h3 class="text-xl font-bold mb-2 text-white">Promoting Empathy & Respect</h3>
+                        <p class="text-lighter">Fostering a culture where senior students act as mentors, not tormentors, and where mutual respect is the foundation of all interactions.</p>
+                    </div>
+                    <!-- Theme 2 -->
+                    <div class="card-bg p-6 rounded-lg shadow-lg border-l-4 border-sky-400">
+                        <h3 class="text-xl font-bold mb-2 text-white">Awareness of Consequences</h3>
+                        <p class="text-lighter">Educating every student about the severe legal and academic repercussions of ragging, ensuring no one can claim ignorance.</p>
+                    </div>
+                    <!-- Theme 3 -->
+                    <div class="card-bg p-6 rounded-lg shadow-lg border-l-4 border-orange-500">
+                        <h3 class="text-xl font-bold mb-2 text-white">Encouraging Bystander Intervention</h3>
+                        <p class="text-lighter">Empowering students to safely speak up and intervene when they witness an act of ragging, breaking the cycle of silence.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Report an Incident Section -->
+        <section id="report" class="py-20 section-bg-darker">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-white">File an Official Complaint</h2>
+                <p class="text-center text-lighter mb-8 max-w-2xl mx-auto">Your report is confidential and is the most effective way to take action. Use the official UGC portal to register your complaint directly with the authorities.</p>
+                <a href="https://www.antiragging.in/complaint_register_form.html" target="_blank" rel="noopener noreferrer" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-full text-xl transition duration-300 transform hover:scale-105">
+                    Go to Official Complaint Form
+                </a>
+                 <p class="text-center text-lighter mt-4 text-sm">You will be redirected to the National Anti-Ragging Helpline website.</p>
+            </div>
+        </section>
+
+        <!-- Helpline Numbers Section -->
+        <section id="helpline" class="py-20 section-bg-dark">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Helpline Numbers & Resources</h2>
+                <p class="text-lighter mb-12 max-w-2xl mx-auto">Don't hesitate to reach out. These resources are available to provide support, guidance, and immediate help.</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-sky-900/50 p-8 rounded-lg shadow-lg border border-sky-700">
+                        <h3 class="text-2xl font-bold text-sky-300">National Anti-Ragging Helpline</h3>
+                        <p class="text-4xl font-bold text-sky-400 my-3">1800-180-5522</p>
+                        <a href="mailto:helpline@antiragging.in" class="text-sky-400 hover:underline text-lg">helpline@antiragging.in</a>
+                        <p class="text-lighter mt-3">24x7 Toll-Free helpline for students in distress.</p>
+                    </div>
+                     <div class="bg-red-900/50 p-8 rounded-lg shadow-lg border border-red-700">
+                        <h3 class="text-2xl font-bold text-red-300">Emergency Police Helpline</h3>
+                        <p class="text-4xl font-bold text-red-400 my-3">100</p>
+                        <p class="text-lighter mt-3">For any situation involving immediate physical danger.</p>
+                    </div>
+                </div>
+
+                <div class="mt-16 text-left max-w-4xl mx-auto">
+                    <h3 class="text-2xl font-bold text-center mb-4 text-white">Additional Mental Health & Crisis Support</h3>
+                    <p class="text-center text-lighter mb-8">Having a support system is very important. Whether it's reaching out to a family member and/or a close friend, or trying to have a strong coping mechanism, you should always have places you can go to feel safe in times of stress or anxiety.</p>
+                    <ul class="space-y-4">
+                        <li class="card-bg p-4 rounded-lg border-l-4 border-orange-500"><strong>AIIMS SWC Helpline:</strong> <a href="tel:+919999865729" class="text-sky-400 hover:underline">+91-999-986-5729</a></li>
+                        <li class="card-bg p-4 rounded-lg border-l-4 border-orange-500"><strong>AASRA:</strong> <a href="tel:+919820466726" class="text-sky-400 hover:underline">+91-982-046-6726</a> (24/7) | <a href="http://aasra.info/" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline">Website</a></li>
+                        <li class="card-bg p-4 rounded-lg border-l-4 border-orange-500"><strong>Sneha Foundation:</strong> <a href="tel:+91444640050" class="text-sky-400 hover:underline">+91-44-4640050</a> (24/7) | <a href="https://www.snehafoundation.in/" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline">Website</a></li>
+                        <li class="card-bg p-4 rounded-lg border-l-4 border-orange-500"><strong>Vandrevala Foundation:</strong> <a href="tel:18602662345" class="text-sky-400 hover:underline">1860-2662-345</a> or <a href="tel:18002333330" class="text-sky-400 hover:underline">1800-2333-330</a> (24/7) | <a href="https://www.vandrevalafoundation.com/" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline">Website</a></li>
+                        <li class="card-bg p-4 rounded-lg border-l-4 border-orange-500"><strong>iCall:</strong> <a href="tel:+919152987821" class="text-sky-400 hover:underline">+91-915-298-7821</a> (Mon-Sat: 8am-10pm) | <a href="http://icallhelpline.org/" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline">Website</a></li>
+                        <li class="card-bg p-4 rounded-lg border-l-4 border-orange-500"><strong>Connecting NGO:</strong> <a href="tel:18002094353" class="text-sky-400 hover:underline">1800-2094-353</a> (12pm-8pm) | <a href="https://projectheena.com/connecting-ngo" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline">Website</a></li>
+                        <li class="card-bg p-4 rounded-lg border-l-4 border-orange-500"><strong>Samaritans Mumbai:</strong> <a href="tel:+918422984528" class="text-sky-400 hover:underline">+91-842-298-4528</a> (5pm-8pm)</li>
+                        <li class="card-bg p-4 rounded-lg border-l-4 border-orange-500"><strong>Find A Helpline:</strong> A directory of helplines for immediate support. | <a href="https://findahelpline.com/in/" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline">Website</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8">
+        <div class="container mx-auto px-6 text-center border-t border-gray-800 pt-8">
+            <p class="text-white">&copy; 2024 Stand Tall Initiative. All Rights Reserved.</p>
+            <p class="text-orange-500 mt-4 font-semibold">An initiative by Dr. Ninad Shah, Dr. Luv Makadia & Dr. Aryan Panchal</p>
+            <p class="text-lighter text-sm mt-1">[BATCH 2020 of GCSMCH&RC]</p>
+            <p class="text-lighter mt-2">A student-led movement for a safer tomorrow.</p>
+        </div>
+    </footer>
+
+    <!-- Swiper.js JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Initialize Swipers
+        const newsSwiper = new Swiper('.news-slider', {
+            loop: true,
+            spaceBetween: 30,
+            navigation: {
+                nextEl: '#news .swiper-button-next',
+                prevEl: '#news .swiper-button-prev',
+            },
+            pagination: {
+                el: '#news .swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                640: { slidesPerView: 1 },
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+            }
+        });
+
+        const statsSwiper = new Swiper('.stats-slider', {
+            loop: true,
+            spaceBetween: 30,
+            navigation: {
+                nextEl: '#stats .swiper-button-next',
+                prevEl: '#stats .swiper-button-prev',
+            },
+            pagination: {
+                el: '#stats .swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                640: { slidesPerView: 1 },
+                768: { slidesPerView: 2 },
+            }
+        });
+
+        const gallerySwiper = new Swiper('.gallery-slider', {
+            loop: true,
+            spaceBetween: 15,
+            navigation: {
+                nextEl: '#gallery .swiper-button-next',
+                prevEl: '#gallery .swiper-button-prev',
+            },
+            pagination: {
+                el: '#gallery .swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                640: { slidesPerView: 1 },
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+                1280: { slidesPerView: 4 },
+            }
+        });
+
+    </script>
+</body>
+</html>
